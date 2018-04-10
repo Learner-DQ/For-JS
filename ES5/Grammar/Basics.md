@@ -34,4 +34,28 @@ a = 1;
 JavaScript有一些保留字，不能用作标识符：arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield。
 ```
 ### 4、区块
-
+JavaScript 使用大括号，将多个相关的语句组合在一起，称为“区块”（block）。
+对于var命令来说，JavaScript 的区块不构成单独的作用域（scope）。
+```javascript
+{
+  var a = 1;
+}
+a // 1
+```
+上面代码在区块内部，使用var命令声明并赋值了变量a，然后在区块外部，变量a依然有效，区块对于var命令不构成单独的作用域，与不使用区块的情况没有任何区别。在 JavaScript 语言中，单独使用区块并不常见，区块往往用来构成其他更复杂的语法结构，比如for、if、while、function等
+### 5、条件语句
+##### 5.1switch结构
+多个if...else连在一起使用的时候，可以转为使用更方便的switch结构。
+```javascript
+switch (fruit) {
+  case "banana":
+    // ...
+    break;
+  case "apple":
+    // ...
+    break;
+  default:
+    // ...
+}
+```
+上面代码根据变量fruit的值，选择执行相应的case。如果所有case都不符合，则执行最后的default部分。需要注意的是，每个case代码块内部的break语句不能少，否则会接下去执行下一个case代码块，而不是跳出switch结构。
