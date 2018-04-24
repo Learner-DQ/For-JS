@@ -65,6 +65,32 @@ Math.pow(2, 1024)
 ```
 上面代码中，第一个是一个表达式的计算结果太大，超出了能够表示的范围，因此返回Infinity。第二个是0除以0会得到NaN，而非0数值除以0，会返回Infinity。</br>
 `Infinity有正负之分，Infinity表示正的无穷，-Infinity表示负的无穷。`</br>
- `Infinity大于一切数值（除了NaN），-Infinity小于一切数值（除了NaN）。`
- 
+ `Infinity大于一切数值（除了NaN），-Infinity小于一切数值（除了NaN）。`</br>
+ `Infinity与NaN比较，总是返回false。`
+###### （2）运算规则
+Infinity的四则运算，符合无穷的数学计算规则。
+```javascript
+5 * Infinity // Infinity
+5 - Infinity // -Infinity
+Infinity / 5 // Infinity
+5 / Infinity // 0
+```
+0乘以Infinity，返回NaN；0除以Infinity，返回0；Infinity除以0，返回Infinity。</br>
+Infinity加上或乘以Infinity，返回的还是Infinity。</br>
+Infinity减去或除以Infinity，得到NaN。</br>
+Infinity与null计算时，null会转成0，等同于与0的计算。</br>
+Infinity与undefined计算，返回的都是NaN。
+### 5、与数值相关的全局方法
+##### 5.1parseInt()
+###### （1）基本用法
+```javascript
+parseInt方法用于将字符串转为整数。
+如果parseInt的参数不是字符串，则会先转为字符串再转换。
+字符串转为整数的时候，是一个个字符依次转换，如果遇到不能转为数字的字符，就不再进行下去，返回已经转好的部分。
+如果字符串的第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN。
+如果字符串以0x或0X开头，parseInt会将其按照十六进制数解析。
+如果字符串以0开头，将其按照10进制解析。
+对于那些会自动转为科学计数法的数字，parseInt会将科学计数法的表示方法视为字符串，因此导致一些奇怪的结果。
+```
+
 
