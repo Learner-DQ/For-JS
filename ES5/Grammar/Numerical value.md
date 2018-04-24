@@ -52,4 +52,19 @@ NaN是 JavaScript 的特殊值，表示“非数字”（Not a Number），主�
 - NaN在布尔运算时被当作false。
 - 数组的indexOf方法内部使用的是严格相等运算符，所以该方法对NaN不成立。
 - NaN与任何数（包括它自己）的运算，得到的都是NaN。
+##### 4.3Infinity
+###### （1）含义
+Infinity表示“无穷”，用来表示两种场景。一种是一个正的数值太大，或一个负的数值太小，无法表示；另一种是非0数值除以0，得到Infinity。
+```javascript
+// 一
+Math.pow(2, 1024)
+// Infinity
+// 二
+0 / 0 // NaN
+1 / 0 // Infinity
+```
+上面代码中，第一个是一个表达式的计算结果太大，超出了能够表示的范围，因此返回Infinity。第二个是0除以0会得到NaN，而非0数值除以0，会返回Infinity。</br>
+`Infinity有正负之分，Infinity表示正的无穷，-Infinity表示负的无穷。`</br>
+ `Infinity大于一切数值（除了NaN），-Infinity小于一切数值（除了NaN）。`
+ 
 
