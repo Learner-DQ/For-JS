@@ -92,5 +92,89 @@ parseInt方法用于将字符串转为整数。
 如果字符串以0开头，将其按照10进制解析。
 对于那些会自动转为科学计数法的数字，parseInt会将科学计数法的表示方法视为字符串，因此导致一些奇怪的结果。
 ```
+###### （2）进制转换
+```javascript
+parseInt('1000', 2) // 8
+parseInt('1000', 6) // 216
+parseInt('1000', 8) // 512
+//二进制、六进制、八进制的1000，分别等于十进制的8、216和512。这意味着，可以用parseInt方法进行进制的转换。
+```
+```javascript
+parseInt('10', 37) // NaN
+parseInt('10', 1) // NaN
+parseInt('10', 0) // 10
+parseInt('10', null) // 10
+parseInt('10', undefined) // 10
+//如果第二个参数不是数值，会被自动转为一个整数。这个整数只有在2到36之间，才能得到有意义的结果，超出这个范围，则返回NaN。如果第二个参数是0、undefined和null，则直接忽略。
+```
+```javascript
+parseInt('1546', 2) // 1
+parseInt('546', 2) // NaN
+//如果字符串包含对于指定进制无意义的字符，则从最高位开始，只返回可以转换的数值。如果最高位无法转换，则直接返回NaN。
+```
+```javascriptparseInt(011, 2) // NaN
+// 等同于
+parseInt(String(011), 2)
+// 等同于
+parseInt(String(9), 2)
+//上面代码中，第一行的011会被先转为字符串9，因为9不是二进制的有效字符，所以返回NaN。如果直接计算parseInt('011', 2) ，011则是会被当作二进制处理，返回3。
+//JavaScript 不再允许将带有前缀0的数字视为八进制数，而是要求忽略这个0。但是，为了保证兼容性，大部分浏览器并没有部署这一条规定。
+```
+##### 5.2parseFloat()
+`parseFloat`方法用于将一个字符串转为浮点数。
+```javavscript
+//parseFloat方法会自动过滤字符串前导的空格。
+parseFloat('\t\v\r12.34\n ') // 12.34
+```
+```javascript
+//如果参数不是字符串，或者字符串的第一个字符不能转化为浮点数，则返回NaN。
+parseFloat([]) // NaN
+parseFloat('FF2') // NaN
+parseFloat('') // NaN
+//parseFloat会将空字符串转为NaN。
+```
+```javascript
+parseFloat(true)  // NaN
+Number(true) // 1
 
+parseFloat(null) // NaN
+Number(null) // 0
 
+parseFloat('') // NaN
+Number('') // 0
+
+parseFloat('123.45#') // 123.45
+Number('123.45#') // NaN
+```
+##### 5.3isNaN()
+isNaN方法可以用来判断一个值是否为NaN。
+```javavscript
+//但是，isNaN只对数值有效，如果传入其他值，会被先转成数值。比如，传入字符串的时候，字符串会被先转成NaN，所以最后返回true，这一点要特别引起注意。也就是说，isNaN为true的值，有可能不是NaN，而是一个字符串。
+
+isNaN('Hello') // true
+// 相当于
+isNaN(Number('Hello')) // true
+
+//但是，对于空数组和只有一个数值成员的数组，isNaN返回false。
+```
+`因此，使用isNaN之前，最好判断一下数据类型。`
+```javascript
+function myIsNaN(value) {
+  return typeof value === 'number' && isNaN(value);
+}
+//判断NaN更可靠的方法是，利用NaN为唯一不等于自身的值的这个特点，进行判断。
+function myIsNaN(value) {
+  return value !== value;
+}
+```
+##### 5.4isFinite()
+isFinite方法返回一个布尔值，表示某个值是否为正常的数值。
+```javascript
+isFinite(Infinity) // false
+isFinite(-Infinity) // false
+isFinite(NaN) // false
+isFinite(undefined) // false
+isFinite(null) // true
+isFinite(-1) // true
+```
+除了Infinity、-Infinity、NaN和undefined这几个值会返回false，isFinite对于其他的数值都会返回true。
