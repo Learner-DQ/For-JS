@@ -50,4 +50,5 @@ longString
 '\x7A' === 'z' // true
 '\u007A' === 'z' // true
 ```
-### 2、字符集
+
+
